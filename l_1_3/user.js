@@ -3,7 +3,7 @@ const user = {
     age: 25,
 }
 
-module.exports = user;
+// module.exports = user;
 module.exports = {
     user: user,
     sayHello() {
