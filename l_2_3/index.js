@@ -17,10 +17,13 @@ app.set('view engine', 'hbs');
 app.set('views', 'views');
 
 app.use(express.static('public'));
+app.use(express.urlencoded({extended: true}));
 app.use('/', homeRoutes);
-// app.use(homeRoutes);
 app.use('/add', addRoutes);
 app.use('/courses', coursesRoutes);
+// app.use(homeRoutes);
+// app.use(addRoutes);
+// app.use(coursesRoutes);
 
 // app.get('/', (req, res) => {
 //     res.render('index', {
