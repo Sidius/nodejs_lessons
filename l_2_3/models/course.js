@@ -20,11 +20,24 @@ class Course {
         };
     }
 
+    static async update(course) {
+        const courses = await Course.getAll();
+
+        const idx = courses.findIndex(c => c.id === course.id);
+        courses[idx] = course;
+        
+        return Course.saveToDatabase(courses);
+    }
+
     async save() {
         const courses = await Course.getAll();
         courses.push(this.toJSON());
 
         // console.log('Courses', courses);
+        return Course.saveToDatabase(courses);
+    }
+
+    static saveToDatabase(courses) {
         return new Promise((resolve, reject) => {
             fs.writeFile(
                 path.join(__dirname, '..', 'data', 'courses.json'),
