@@ -25,7 +25,7 @@ class Course {
 
         const idx = courses.findIndex(c => c.id === course.id);
         courses[idx] = course;
-        
+
         return Course.saveToDatabase(courses);
     }
 
