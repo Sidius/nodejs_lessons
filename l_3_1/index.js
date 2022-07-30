@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const mongoose = require('mongoose');
 const exphbs = require('express-handlebars');
 const homeRoutes = require('./routes/home')
 const cardRoutes = require('./routes/card')
@@ -27,8 +28,21 @@ app.use('/card', cardRoutes);
 
 const PORT = process.env.PORT || 3000;
 
-const url = `mongodb+srv://romanets:k1ZSvdCGaKFqEcv5@cluster0.t2dugdk.mongodb.net/?retryWrites=true&w=majority`;
+async function start() {
+    try {
+        const url = `mongodb+srv://romanets:k1ZSvdCGaKFqEcv5@cluster0.t2dugdk.mongodb.net/?retryWrites=true&w=majority`;
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+        await mongoose.connect(url, {
+            useNewUrlParser: true
+        });
+
+        app.listen(PORT, () => {
+            console.log(`Server is running on port ${PORT}`);
+        })
+        
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+start();
