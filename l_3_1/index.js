@@ -11,7 +11,11 @@ const app = express();
 
 const hgs = exphbs.create({
     defaultLayout: 'main',
-    extname: 'hbs'
+    extname: 'hbs',
+    runtimeOptions: {
+        allowProtoPropertiesByDefault: true,
+        allowProtoMethodsByDefault: true
+    }
 });
 
 app.engine('hbs', hgs.engine);
