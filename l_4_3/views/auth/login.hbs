@@ -27,7 +27,7 @@
             <h2>Register to shop</h2>
             <form action="/auth/register" method="post">
                 <div class="input-field">
-                    <input name="remail" id="email" type="text" class="validate" required>
+                    <input name="mail" id="remail" type="text" class="validate" required>
                     <label for="remail">Email</label>
                     <span class="helper-text" data-error="Type email"></span>
                 </div>
@@ -40,6 +40,11 @@
                     <input name="confirm" id="confirm" type="password" class="validate" required>
                     <label for="confirm">Repeat password</label>
                     <span class="helper-text" data-error="Type password"></span>
+                </div>
+                <div class="input-field">
+                    <input name="name" id="name" type="text" class="validate" required>
+                    <label for="name">Name</label>
+                    <span class="helper-text" data-error="Type name"></span>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Register</button>
