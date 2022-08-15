@@ -1,7 +1,22 @@
 const {Router} = require('express');
 const bcrypt = require('bcryptjs');
+const nodemailer = require('nodemailer');
 const User = require('../models/user');
+const keys = require('../keys');
+const regEmail = require('../emails/registration');
 const router = Router();
+
+let testEmailAccount = nodemailer.createTestAccount()
+
+const transporter = nodemailer.createTransport({
+    host: 'smtp.ethereal.email',
+    port: 587,
+    secure: false,
+    auth: {
+        user: testEmailAccount.user,
+        pass: testEmailAccount.pass
+    }
+});
 
 router.get('/login', async (req, res) => {
     res.render('auth/login', {
@@ -74,6 +89,7 @@ router.post('/register', async (req, res) => {
             });
             await user.save();
             res.redirect('/auth/login');
+            // await transporter.sendMail(regEmail(email));
         }
     } catch (e) {
         console.log(e);
