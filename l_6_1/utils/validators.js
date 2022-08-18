@@ -1,7 +1,17 @@
 const {body} = require('express-validator');
+const User = require('../models/user');
 
 exports.registerValidators = [
-    body('email').isEmail().withMessage('Type correct email'),
+    body('email').isEmail().withMessage('Type correct email').custom(async (value, {req}) => {
+        try {
+            const user = await User.findOne({ email: value });
+            if (user) {
+                return Promise.reject('This email is in base');
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }),
     body('password', 'Password must be more than 5 symbols').isLength({
         min: 6,
         max: 56
