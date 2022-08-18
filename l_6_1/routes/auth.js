@@ -1,12 +1,12 @@
 const {Router} = require('express');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
-const {body} = require('express-validator');
+const {validationResult} = require('express-validator');
 const nodemailer = require('nodemailer');
 const User = require('../models/user');
 const keys = require('../keys');
 const regEmail = require('../emails/registration');
-const {validationResult} = require("express-validator");
+const {registerValidators} = require('../utils/validators');
 const router = Router();
 
 let testEmailAccount = nodemailer.createTestAccount()
@@ -75,7 +75,7 @@ router.get('/register', async (req, res) => {
     });
 });
 
-router.post('/register', body('email').isEmail(), async (req, res) => {
+router.post('/register', registerValidators, async (req, res) => {
     try {
         const {email, password, confirm, name} = req.body;
         const candidate = await User.findOne({email});
