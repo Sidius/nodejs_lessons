@@ -32,5 +32,5 @@ exports.courseValidators = [
         min: 3
     }).withMessage('Minimal title length 3 symbols').trim(),
     body('price').isNumeric().withMessage('Enter correct price'),
-    body('img').isNumeric().withMessage('Enter correct image url').isURL(),
+    body('img').isURL().withMessage('Enter correct image url'),
 ];
