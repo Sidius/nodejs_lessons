@@ -1,6 +1,5 @@
-module.exports = {
-    MONGODB_URI: `mongodb+srv://romanets:k1ZSvdCGaKFqEcv5@cluster0.t2dugdk.mongodb.net/shop`,
-    SESSION_SECRET: 'some secret value',
-    EMAIL_FROM: 'nodejs@example.com',
-    BASE_URL: 'http://localhost:3000',
+if (process.env.NODE_ENV === 'production') {
+    module.exports = require('./keys.prod');
+} else {
+    module.exports = require('./keys.dev');
 }
